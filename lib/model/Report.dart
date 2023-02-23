@@ -15,6 +15,15 @@ class Report extends StatelessWidget {
 
   const Report(this.code, this.name, this.timestamp, this.seriesType, this.metric, this.color, this.categories, {Key? key}) : super(key: key);
 
+  String finalValueConcatUnit(Report report){
+    final valueConcat = report.categories.first.analytes.first;
+    String answer = '';
+    if(valueConcat.finalValue.isNotEmpty && valueConcat.unit.isNotEmpty){
+      answer = valueConcat.finalValue + valueConcat.unit;
+    }
+    return answer;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -54,26 +63,7 @@ class Report extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: const [
-                          Icon(Icons.info_outlined, color: Colors.orangeAccent,),
-                          Text('Eritrocitos totais')
-                        ],
-                      ),
-                      Row(
-                        children: const [
-                          Icon(Icons.info_outline, color: Colors.orangeAccent),
-                          Text('Hematócrito')
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                Text(categories.first.analytes.first.finalValue),
                 SizedBox(
                   width: 30,
                   child: Column(
@@ -90,3 +80,4 @@ class Report extends StatelessWidget {
     );
   }
 }
+
